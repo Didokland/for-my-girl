@@ -1,0 +1,341 @@
+/* ======= БАЗОВЫЙ СТИЛЬ ======= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: radial-gradient(circle at 20% 20%, #0a0f1f, #000);
+  color: #e0e0e0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ======= НАВИГАЦИЯ ======= */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 60px;
+  background: rgba(15, 15, 35, 0.8);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: 600;
+  color: #00c8ff;
+  letter-spacing: 1px;
+}
+
+.logo span {
+  color: #00ffae;
+}
+
+.navbar nav a {
+  text-decoration: none;
+  color: #bbb;
+  margin-left: 25px;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.navbar nav a:hover,
+.navbar nav a.active {
+  color: #00ffae;
+  text-shadow: 0 0 10px #00ffae;
+}
+
+/* ======= ГЛАВНЫЙ ЭКРАН ======= */
+.hero {
+  text-align: center;
+  padding: 100px 40px 60px;
+}
+
+.hero h1 {
+  font-size: 36px;
+  color: #00c8ff;
+  text-shadow: 0 0 20px #00c8ff88;
+  margin-bottom: 20px;
+}
+
+.hero p {
+  max-width: 700px;
+  margin: 0 auto 40px;
+  color: #bbb;
+  line-height: 1.6;
+  font-size: 18px;
+}
+
+/* ======= КНОПКИ ======= */
+.btn {
+  display: inline-block;
+  padding: 12px 26px;
+  border-radius: 8px;
+  margin: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn.primary {
+  background: linear-gradient(90deg, #00c8ff, #00ffae);
+  color: #000;
+}
+
+.btn.primary:hover {
+  box-shadow: 0 0 20px #00ffae88;
+}
+
+.btn.secondary {
+  border: 1px solid #00c8ff;
+  color: #00c8ff;
+}
+
+.btn.secondary:hover {
+  background: #00c8ff;
+  color: #000;
+  box-shadow: 0 0 15px #00c8ff;
+}
+
+.btn.login {
+  border: 1px solid #00ffae;
+  color: #00ffae;
+}
+
+.btn.login:hover {
+  background: #00ffae;
+  color: #000;
+  box-shadow: 0 0 20px #00ffae;
+}
+
+/* ======= БЛОКИ ======= */
+.features {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 25px;
+  padding: 60px 40px;
+}
+
+.feature-box {
+  background: rgba(20, 25, 45, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  width: 280px;
+  padding: 30px 20px;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.feature-box:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 0 30px #00c8ff44;
+}
+
+.feature-box h3 {
+  color: #00ffae;
+  margin-bottom: 10px;
+}
+
+.feature-box p {
+  color: #bbb;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+/* ======= МОДАЛЬНОЕ ОКНО ======= */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(10, 10, 20, 0.8);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: #101525;
+  padding: 30px;
+  border-radius: 10px;
+  text-align: center;
+  width: 320px;
+  box-shadow: 0 0 25px #00ffae33;
+}
+
+.modal-content h2 {
+  margin-bottom: 10px;
+  color: #00c8ff;
+}
+
+.modal-content p {
+  color: #bbb;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 6px;
+  border: 1px solid #00c8ff;
+  background: #0a0f1f;
+  color: #fff;
+}
+
+.modal-buttons {
+  margin-top: 10px;
+}
+
+/* ======= ПОДВАЛ ======= */
+footer {
+  margin-top: auto;
+  text-align: center;
+  padding: 20px;
+  color: #888;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(10, 15, 25, 0.8);
+}
+
+/* ======= АДАПТИВ ======= */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    padding: 14px;
+  }
+  .features {
+    flex-direction: column;
+    align-items: center;
+  }
+  .hero h1 {
+    font-size: 28px;
+  }
+}
+/* Фоновая секция */
+.login-section {
+  background: url('mktu_bg.jpg') no-repeat center center/cover; /* фото университета */
+  background-size: cover;
+  background-position: center;
+  width: 300px;
+  min-height: 40vh;
+  height: 300px;
+  display: flex;
+  position: fixed;
+  top: 20%;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 0;
+}
+
+/* Карточка логина */
+.login-card {
+  background-size: cover;
+  background-position: center;
+  padding: 40px;
+  border-radius: 15px;
+  width: 350px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+  color: #fff;
+}
+
+.login-card h2 {
+  color: #00ffff;
+  margin-bottom: 20px;
+  font-size: 28px;
+}
+
+.login-card input {
+  width: 100%;
+  padding: 12px 10px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: none;
+}
+
+.login-card .btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 15px;
+  border-radius: 8px;
+  border: none;
+  background: linear-gradient(90deg, #00ffff, #00ff7f);
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.login-card .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0,255,255,0.5);
+}
+
+.login-card a {
+  color: #00ff7f;
+  text-decoration: none;
+  font-weight: bold;
+}
+body {
+  margin: 0;
+  height: 100vh;
+  
+}
+
+/* Контент сайта */
+.site-content {
+  padding: 50px;
+}
+.site-content h1 {
+  margin-bottom: 20px;
+}
+
+/* Вертикальная лента поверх всего */
+.vertical-carousel {
+  position: fixed;       /* поверх всех элементов */
+  top: 150px;             /* отступ сверху */
+  right: 20px;           /* отступ справа */
+  width: 120px;          /* ширина ленты */
+  height: 400px;         /* высота ленты */
+  overflow: hidden;
+  pointer-events: none;  /* клики проходят через блок */
+  z-index: 9999;         /* поверх всего */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255,255,255,0.05);
+  border-radius: 15px;
+  padding: 10px;
+}
+
+
+/* Трек с картинками */
+.vertical-track {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  animation: scroll-vertical 8s linear infinite;
+}
+
+/* Картинки */
+.vertical-track img {
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+/* Анимация вертикальной прокрутки */
+@keyframes scroll-vertical {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-70%); } /* смещение трека вверх */
+}

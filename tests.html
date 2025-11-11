@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Тесттер | ҰБТ — жеңіл нұсқа</title>
+  <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">UBT<span>Lite</span></div>
+    <nav>
+      <a href="index.html">Басты</a>
+      <a href="courses.html">Курстар</a>
+      <a href="tests.html" class="active">Тесттер</a>
+      <a href="database.html">База</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Тесттер бөлімі</h1>
+    <p>ҰБТ форматына ұқсас бірнеше сұраққа жауап беріп, нәтижеңді көр.</p>
+  </section>
+
+  <section class="features" id="test-container">
+    <!-- Тест сұрақтары -->
+    <div class="feature-box">
+      <h3>1. HTML дегеніміз не?</h3>
+      <label><input type="radio" name="q1" value="a"> Программалау тілі</label><br>
+      <label><input type="radio" name="q1" value="b"> Гипермәтін белгілеу тілі</label><br>
+      <label><input type="radio" name="q1" value="c"> Мәліметтер базасы</label>
+    </div>
+
+    <div class="feature-box">
+      <h3>2. JavaScript не үшін қолданылады?</h3>
+      <label><input type="radio" name="q2" value="a"> Деректерді сақтау</label><br>
+      <label><input type="radio" name="q2" value="b"> Веб-бетті безендіру</label><br>
+      <label><input type="radio" name="q2" value="c"> Интерактивтілік қосу</label>
+    </div>
+
+    <div class="feature-box">
+      <h3>3. Кітапты оқып болған соң, мен жазуға кірістім.» сөйлемінде баяндауыштың түрі қандай</h3>
+      <label><input type="radio" name="q3" value="a"> Жай етістік</label><br>
+      <label><input type="radio" name="q3" value="b"> Есім баяндауыш</label><br>
+      <label><input type="radio" name="q3" value="c">Күрделі етістік </label>
+    </div>
+    
+    <div class="feature-box">
+      <h3>4. Туынды сөзді табыңыз:</h3>
+      <label><input type="radio" name="q4" value="a">Оқулық </label><br>
+      <label><input type="radio" name="q4" value="b"> Кітап</label><br>
+      <label><input type="radio" name="q4" value="c"> Дос</label>
+    </div>
+ 
+<div class="feature-box">
+      <h3>5.Егер 2х+5=11,онда х-тің мәні неге тең? :</h3>
+      <label><input type="radio" name="q5" value="a">0 және 4</label><br>
+      <label><input type="radio" name="q5" value="b">1 және 3 </label><br>
+      <label><input type="radio" name="q5" value="c">4 және -4 </label>
+    </div>
+
+    <button class="btn primary" id="submitTest">Нәтижені көру</button>
+
+    <div id="resultBox" style="display:none; margin-top:20px; text-align:center;">
+      <h2 id="scoreText"></h2>
+      <button class="btn secondary" onclick="location.reload()">Қайта тапсыру</button>
+    </div>
+  </section>
+
+  <footer>
+    <p>© Didokland_iksd авторлық құқық сақталады. (2025)</p>
+  </footer>
+
+  <script>
+    document.getElementById("submitTest").addEventListener("click", () => {
+      const answers = {
+        q1: "b",
+        q2: "c",
+        q3: "c",
+        q4: "a",
+        q5: "a",
+        q6: "",
+        q7: "",
+        q8: "",
+        q9: "",
+        q10: ""
+      };
+
+      let score = 0;
+      let total = Object.keys(answers).length;
+
+      for (let q in answers) {
+        const selected = document.querySelector(`input[name="${q}"]:checked`);
+        if (selected && selected.value === answers[q]) score++;
+      }
+
+      const percent = Math.round((score / total) * 100);
+      document.getElementById("scoreText").innerText =
+        `✅ Дұрыс жауаптар: ${score}/${total} (${percent}%)`;
+      document.getElementById("resultBox").style.display = "block";
+      window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+    });
+  </script>
+</body>
+</html>
