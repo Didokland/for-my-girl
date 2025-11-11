@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ҰБТ — Жеңіл нұсқа</title>
+  <link rel="stylesheet" href="style2.css" />
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">UBT<span>Lite</span></div>
+    <nav>
+      <a href="index.html" class="active">Басты</a>
+      <a href="courses.html">Курстар</a>
+      <a href="tests.html">Тесттер</a>
+      <a href="database.html">База</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Ұлттық Бірыңғай Тестке дайындық</h1>
+    <p>UBT Lite — бұл жеңіл, жылдам және тегін дайындық жүйесі. Мұнда сен курстарды өтіп, тесттерді орындап, өз нәтижеңді көре аласың.</p>
+    <div class="buttons">
+      <a href="courses.html" class="btn primary">Курстар</a>
+      <a href="tests.html" class="btn secondary">Тесттер</a>
+      <button id="loginBtn" class="btn login">Кіру</button>
+      
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="feature-box">
+      <h3>📘 Курстар</h3>
+      <p>ҰБТ пәндері бойынша сапалы курстар мен қысқа теориялық материалдар.</p>
+    </div>
+    <div class="feature-box">
+      <h3>🧩 Тесттер</h3>
+      <p>Нағыз форматтағы сұрақтар және автоматты тексеру.</p>
+    </div>
+    <div class="feature-box">
+      <h3>💾 База</h3>
+      <p>Өз тестіңді немесе курс қос, барлығы localStorage-та сақталады.</p>
+    </div>
+  </section>
+
+<!-- Фоновый блок -->
+<section class="login-section">
+  <div class="login-card">
+    <h2>Кіру / Тіркелу</h2>
+
+    <form id="loginForm">
+      <input type="text" id="loginUser" placeholder="Логин" required>
+      <input type="password" id="loginPass" placeholder="Құпия сөз" required>
+      <button type="submit" id="loginBtn" class="btn">Кіру</button>
+    </form>
+
+    <p>Жаңа қолданушы ма? <a href="register.html">Тіркелу</a></p>
+  </div>
+</section>
+<div class="vertical-carousel">
+  <div class="vertical-track">
+    <img src="img1.jpg" alt="">
+    <img src="img2.jpg" alt="">
+    <img src="img3.jpg" alt="">
+    <img src="img4.jpg" alt="">
+    <img src="img5.jpg" alt="">
+    <img src="img6.jpg" alt="">
+    <img src="img7.jpg" alt="">
+    <img src="img8.jpg" alt="">
+    <img src="img9.jpg" alt="">
+    <img src="img10.jpg" alt="">
+    <!-- дублируем для бесконечной прокрутки -->
+    <img src="img1.jpg" alt="">
+    <img src="img2.jpg" alt="">
+  </div>
+</div>
+  <footer>
+    <p>© Didokland_iksd авторлық құқық сақталады. (2025) </p>
+  </footer>
+
+  <script src="script.js"></script>
+
+
+</body>
+</html>

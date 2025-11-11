@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Didoland_database</title>
+  <link rel="stylesheet" href="style2.css" />
+</head>
+<body>
+  <header class="navbar">
+    <h1>UBT Базасы</h1>
+    <nav>
+      <a href="index.html">Басты бет</a>
+      <a href="courses.html">Курстар</a>
+      <a href="tests.html">Тесттер</a>
+      <button id="logoutBtn" class="btn">Шығу</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h2>Мәліметтер базасы</h2>
+    <p>Мұнда сіз өз курстарыңызды немесе тесттеріңізді сақтай аласыз 💾</p>
+
+    <div class="form-box">
+      <input type="text" id="dataInput" placeholder="Жаңа жазба енгізіңіз..." />
+      <button id="saveBtn" class="btn">Сақтау</button>
+    </div>
+
+    <ul id="dataList" class="data-list"></ul>
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+    // Доступ тек кірген қолданушыларға
+    if (!localStorage.getItem("loggedIn")) {
+      window.location.href = "index.html";
+    }
+
+    const saveBtn = document.getElementById("saveBtn");
+    const dataInput = document.getElementById("dataInput");
+    const dataList = document.getElementById("dataList");
+    const logoutBtn = document.getElementById("logoutBtn");
+
+    // Лог аут
+    logoutBtn.addEventListener("click", () => {
+      localStorage.removeItem("loggedIn");
+      window.location.href = "index.html";
+    });
+
+    // Мәліметтер сақтау
+    saveBtn.addEventListener("click", () => {
+      const text = dataInput.value.trim();
+      if (text === "") return;
+
+      const li = document.createElement("li");
+      li.textContent = text;
+      dataList.appendChild(li);
+      dataInput.value = "";
+
+      // Локал сақтау
+      const saved = JSON.parse(localStorage.getItem("userData") || "[]");
+      saved.push(text);
+      localStorage.setItem("userData", JSON.stringify(saved));
+    });
+    
+    // Алдыңғы мәліметтерді шығару
+    window.addEventListener("load", () => {
+      const saved = JSON.parse(localStorage.getItem("userData") || "[]");
+      saved.forEach(item => {
+        const li = document.createElement("li");
+        li.textContent = item;
+        dataList.appendChild(li);
+      });
+    });
+  </script>
+</body>
+</html>
