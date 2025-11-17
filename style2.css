@@ -7,12 +7,16 @@
 }
 
 body {
-  background: radial-gradient(circle at 20% 20%, #0a0f1f, #000);
+  margin: 0;
+  padding: 0;
+
+  background-attachment: fixed;  /* красиво фиксируется */
   color: #e0e0e0;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
+
 
 /* ======= НАВИГАЦИЯ ======= */
 .navbar {
@@ -285,11 +289,6 @@ footer {
   text-decoration: none;
   font-weight: bold;
 }
-body {
-  margin: 0;
-  height: 100vh;
-  
-}
 
 /* Контент сайта */
 .site-content {
@@ -299,7 +298,7 @@ body {
   margin-bottom: 20px;
 }
 
-/* Вертикальная лента поверх всего */
+/* Вертикальная карусель */
 .vertical-carousel {
   position: fixed;       /* поверх всех элементов */
   top: 150px;             /* отступ сверху */
@@ -307,7 +306,6 @@ body {
   width: 120px;          /* ширина ленты */
   height: 400px;         /* высота ленты */
   overflow: hidden;
-  pointer-events: none;  /* клики проходят через блок */
   z-index: 9999;         /* поверх всего */
   display: flex;
   flex-direction: column;
@@ -316,7 +314,6 @@ body {
   border-radius: 15px;
   padding: 10px;
 }
-
 
 /* Трек с картинками */
 .vertical-track {
@@ -332,6 +329,14 @@ body {
   height: 100px;
   border-radius: 10px;
   object-fit: cover;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+/* Ссылки вокруг картинок */
+.vertical-track a {
+  display: block;
+  pointer-events: auto;
 }
 
 /* Анимация вертикальной прокрутки */
@@ -339,3 +344,19 @@ body {
   0% { transform: translateY(0); }
   100% { transform: translateY(-70%); } /* смещение трека вверх */
 }
+
+
+.bg-slider {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1;
+    transition: opacity 1s ease;
+    opacity: 1;
+}
+
