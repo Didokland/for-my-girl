@@ -124,8 +124,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // ---------------------------
   const images = [
   "ubt_taps.jpg",
-  "ubt_taps2.jpg",
-  "ubt_taps3.jpg",
+  "ubt_taps2_2.jpg",
+  "ubt_taps3_3.jpg",
   "ubt_taps4.jpg"
 ];
 
@@ -172,3 +172,4 @@ if (bg) { // проверка, что блок есть
   }
 
 });
+
