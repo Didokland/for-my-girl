@@ -42,6 +42,9 @@
       <p>Өз тестіңді немесе курс қос, барлығы localStorage-та сақталады.</p>
     </div>
   </section>
+  
+  <div class="bg-slider"></div>
+
 
 <!-- Фоновый блок -->
 <section class="login-section">
@@ -59,21 +62,29 @@
 </section>
 <div class="vertical-carousel">
   <div class="vertical-track">
-    <img src="img1.jpg" alt="">
-    <img src="img2.jpg" alt="">
-    <img src="img3.jpg" alt="">
-    <img src="img4.jpg" alt="">
-    <img src="img5.jpg" alt="">
-    <img src="img6.jpg" alt="">
-    <img src="img7.jpg" alt="">
-    <img src="img8.jpg" alt="">
-    <img src="img9.jpg" alt="">
-    <img src="img10.jpg" alt="">
+    <a href="https://daryn.online/" target="_blank"><img src="img1.jpg" alt=""></a>
+    <a href="https://daryn.online/" target="_blank"><img src="img2.jpg" alt=""></a>
+    <a href="https://daryn.online/" target="_blank"><img src="img3.jpg" alt=""></a>
+    <a href="https://daryn.online/" target="_blank"><img src="img4.jpg" alt=""></a>
+    <a href="https://daryn.online/" target="_blank"><img src="img5.jpg" alt=""></a>
+    <a href="#"><img src="img6.jpg" alt=""></a>
+    <a href="#"><img src="img7.jpg" alt=""></a>
+    <a href="#"><img src="img8.jpg" alt=""></a>
+    <a href="#"><img src="img9.jpg" alt=""></a>
+    <a href="#"><img src="img10.jpg" alt=""></a>
     <!-- дублируем для бесконечной прокрутки -->
-    <img src="img1.jpg" alt="">
-    <img src="img2.jpg" alt="">
+    <a href="#"><img src="img1.jpg" alt=""></a>
+    <a href="#"><img src="img2.jpg" alt=""></a>
   </div>
 </div>
+<!-- Модальное окно -->
+<div id="imgModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); justify-content:center; align-items:center; z-index:10000;">
+  <span id="closeModal" style="position:absolute; top:20px; right:30px; font-size:40px; color:#fff; cursor:pointer;">&times;</span>
+  <img id="modalImg" src="" style="max-width:90%; max-height:90%; border-radius:15px;">
+</div>
+
+
+
   <footer>
     <p>© Didokland_iksd авторлық құқық сақталады. (2025) </p>
   </footer>
