@@ -320,7 +320,7 @@ footer {
   display: flex;
   flex-direction: column;
   gap: 15px;
-  animation: scroll-vertical 8s linear infinite;
+  animation: scroll-vertical 12s linear infinite;
 }
 
 /* Картинки */
@@ -359,4 +359,5 @@ footer {
     transition: opacity 1s ease;
     opacity: 1;
 }
+
 
