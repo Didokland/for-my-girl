@@ -65,14 +65,18 @@ body {
   color: #00c8ff;
   text-shadow: 0 0 20px #00c8ff88;
   margin-bottom: 20px;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
+
 }
 
 .hero p {
   max-width: 700px;
   margin: 0 auto 40px;
-  color: #bbb;
+  color: #00c8ff;
   line-height: 1.6;
   font-size: 18px;
+  text-shadow: 2px 4px 6px rgba(0, 0, 0, 0.8);
+;
 }
 
 /* ======= КНОПКИ ======= */
@@ -97,18 +101,21 @@ body {
 
 .btn.secondary {
   border: 1px solid #00c8ff;
-  color: #00c8ff;
+  color: #0c1214;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
+
 }
 
 .btn.secondary:hover {
   background: #00c8ff;
   color: #000;
-  box-shadow: 0 0 15px #00c8ff;
+  box-shadow: 0 4px 15px #000000;
+
 }
 
 .btn.login {
   border: 1px solid #00ffae;
-  color: #00ffae;
+  color: #000000;
 }
 
 .btn.login:hover {
@@ -359,5 +366,23 @@ footer {
     transition: opacity 1s ease;
     opacity: 1;
 }
+.topics ul {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 баған */
+  gap: 10px;
+  list-style: none;
+  padding: 0;
+}
 
-
+.topics li {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 10px;
+  border-radius: 8px;
+  text-shadow: 0 0 5px #000;
+}
+.container {
+  background: rgba(0, 0, 0, 0.45);
+  padding: 25px;
+  border-radius: 14px;
+  backdrop-filter: blur(4px); /* өте әдемі эффект */
+}
