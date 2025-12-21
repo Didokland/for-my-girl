@@ -7,6 +7,11 @@
   <link rel="stylesheet" href="style2.css">
 </head>
 <body>
+<script>
+  if (!localStorage.getItem("loggedIn")) {
+    window.location.href = "index.html";
+  }
+</script>
 
   <!-- Фоновый блок -->
 <div class="bg-slider"></div>
@@ -110,3 +115,4 @@
   </script>
 </body>
 </html>
+
