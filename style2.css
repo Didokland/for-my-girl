@@ -386,7 +386,6 @@ footer {
   border-radius: 14px;
   backdrop-filter: blur(4px); /* өте әдемі эффект */
 }
-
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -431,4 +430,65 @@ footer {
 .card:hover {
   transform: translateY(-10px) scale(1.02);
   box-shadow: 0 0 35px #00c8ff55;
+}
+.person-block {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: rgba(0,0,0,0.35);
+  padding: 18px;
+  border-radius: 14px;
+  margin-bottom: 15px;
+}
+
+.person-block img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%; /* дөңгелек фото */
+  object-fit: cover;
+  border: 2px solid #00ffae;
+}
+
+.person-text h3 {
+  color: #00ffae;
+  margin-bottom: 5px;
+}
+
+.person-text p {
+  color: #ccc;
+  font-size: 14px;
+}
+.video-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.video-content {
+  position: relative;
+  width: 80%;
+  max-width: 800px;
+  aspect-ratio: 16 / 9;
+}
+
+.video-content iframe {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+}
+
+.close-btn {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  background: red;
+  color: #fff;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
 }
