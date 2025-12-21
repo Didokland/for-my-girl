@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const currentPage = window.location.pathname.split("/").pop();
 
   
+
   // ---------------------------
   // 🔐 Кнопка выхода (logout)
   // ---------------------------
@@ -170,6 +171,7 @@ if (bg) { // проверка, что блок есть
       if (e.target === modal) modal.style.display = "none";
     });
   }
+  
+
 
 });
-
