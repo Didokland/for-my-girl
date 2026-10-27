@@ -1673,3 +1673,836 @@ body[data-screen="home"] .feed-card-action:hover {
   gap: 12px;
   flex-wrap: wrap;
 }
+
+
+/* ==========================================================================
+   EDITORIAL TRAVEL GUIDE MAGAZINE STYLES (guide.js & #guide)
+   ========================================================================== */
+
+.guide-article-wrap {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding-bottom: 40px;
+}
+
+/* Hero Magazine Header */
+.guide-hero {
+  background: linear-gradient(135deg, rgba(10, 58, 71, 0.97) 0%, rgba(6, 34, 43, 0.99) 100%);
+  border-radius: var(--radius-lg);
+  padding: 38px 30px;
+  color: #ffffff;
+  margin-bottom: 26px;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--gold-border);
+  position: relative;
+  overflow: hidden;
+}
+
+.guide-hero::after {
+  content: "";
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle, rgba(200, 150, 46, 0.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.guide-edition-badge {
+  display: inline-block;
+  background: var(--gold);
+  color: #07222a;
+  font: 700 0.78rem "Trebuchet MS", sans-serif;
+  letter-spacing: 0.1em;
+  padding: 4px 14px;
+  border-radius: var(--radius-pill);
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.guide-hero-title {
+  font-family: Georgia, serif;
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1.16;
+  color: #ffffff;
+  margin-bottom: 14px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.guide-hero-subtitle {
+  color: #e2edf0;
+  font-size: 1.15rem;
+  line-height: 1.55;
+  margin-bottom: 22px;
+  font-family: "Trebuchet MS", sans-serif;
+}
+
+.guide-advisory-alert {
+  background: rgba(200, 150, 46, 0.16);
+  border: 1px solid var(--gold);
+  border-radius: var(--radius-sm);
+  padding: 14px 18px;
+  font-size: 0.88rem;
+  color: #fbf5e7;
+  line-height: 1.55;
+}
+
+/* Qonaq Hospitality Card */
+.guide-qonaq-card {
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-left: 6px solid var(--gold);
+  border-radius: var(--radius-md);
+  padding: 26px 28px;
+  margin-bottom: 26px;
+  box-shadow: var(--shadow-sm);
+}
+
+.guide-qonaq-card h3 {
+  color: var(--deep);
+  font-size: 1.4rem;
+  margin-bottom: 12px;
+  font-family: Georgia, serif;
+}
+
+.guide-qonaq-quote {
+  font-style: italic;
+  color: var(--ink);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin-bottom: 14px;
+}
+
+.guide-qonaq-text {
+  color: var(--ink-soft);
+  font-size: 0.98rem;
+  line-height: 1.65;
+}
+
+/* Quick Facts Strip */
+.guide-facts-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.guide-fact-box {
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease;
+}
+
+.guide-fact-box:hover {
+  transform: translateY(-2px);
+  border-color: var(--gold);
+}
+
+.guide-fact-icon {
+  font-size: 1.6rem;
+  flex-shrink: 0;
+}
+
+.guide-fact-label {
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin-bottom: 2px;
+}
+
+.guide-fact-val {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--deep);
+  line-height: 1.25;
+}
+
+/* Sticky Chapter Navigation Bar */
+.guide-toc-nav {
+  position: sticky;
+  top: 60px;
+  z-index: 28;
+  background: rgba(245, 241, 232, 0.96);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 34px;
+}
+
+.guide-toc-scroll {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: thin;
+}
+
+.guide-toc-pill {
+  background: #ffffff;
+  border: 1px solid var(--line);
+  color: var(--deep);
+  border-radius: var(--radius-pill);
+  padding: 7px 16px;
+  font: 600 0.84rem "Trebuchet MS", sans-serif;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+
+.guide-toc-pill:hover {
+  background: var(--sand-dark);
+  border-color: var(--blue);
+  color: var(--blue);
+}
+
+.guide-toc-pill.active {
+  background: var(--deep);
+  color: #ffffff;
+  border-color: var(--deep);
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(10, 58, 71, 0.25);
+}
+
+/* Chapter Main Sections */
+.guide-chapter-section {
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 34px 28px;
+  margin-bottom: 34px;
+  box-shadow: var(--shadow-sm);
+  scroll-margin-top: 120px;
+}
+
+.guide-ch-header {
+  margin-bottom: 24px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--line-light);
+}
+
+.guide-ch-num {
+  display: inline-block;
+  background: var(--gold-soft);
+  color: #795200;
+  border: 1px solid var(--gold);
+  border-radius: var(--radius-pill);
+  padding: 2px 12px;
+  font: 700 0.8rem "Trebuchet MS", sans-serif;
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+}
+
+.guide-ch-title {
+  color: var(--deep);
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  font-family: Georgia, serif;
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+
+.guide-ch-summary {
+  color: var(--ink-soft);
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.guide-subheading {
+  color: var(--deep);
+  font-size: 1.25rem;
+  font-family: Georgia, serif;
+  margin: 24px 0 10px;
+}
+
+.guide-p {
+  color: var(--ink-soft);
+  font-size: 0.98rem;
+  line-height: 1.7;
+  margin-bottom: 14px;
+}
+
+/* Callout Box for Local Tips */
+.guide-callout {
+  background: #faf6eb;
+  border-left: 5px solid var(--gold);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: 20px 24px;
+  margin: 24px 0;
+  box-shadow: var(--shadow-sm);
+}
+
+.guide-callout-title {
+  color: #795200;
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.guide-callout p {
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* Apps Grid */
+.guide-apps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 16px;
+  margin: 20px 0 26px;
+}
+
+.guide-app-card {
+  background: var(--sand-light);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.guide-app-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+  border-color: var(--blue);
+}
+
+.guide-app-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.guide-app-cat {
+  background: var(--deep);
+  color: #ffffff;
+  border-radius: var(--radius-pill);
+  padding: 2px 8px;
+  font: 700 0.72rem "Trebuchet MS", sans-serif;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.guide-app-link {
+  font: 700 0.84rem "Trebuchet MS", sans-serif;
+  color: var(--blue);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.guide-app-link:hover {
+  text-decoration: underline;
+  color: var(--blue-dark);
+}
+
+.guide-app-name {
+  font-size: 1.15rem;
+  color: var(--deep);
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.guide-app-desc {
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  line-height: 1.5;
+  margin-bottom: 8px;
+  flex-grow: 1;
+}
+
+.guide-app-tip {
+  font-size: 0.82rem;
+  color: #795200;
+  background: var(--gold-soft);
+  border-radius: var(--radius-sm);
+  padding: 6px 10px;
+  border: 1px dashed var(--gold);
+}
+
+/* Interactive Tool Cards */
+.tool-widget-card {
+  background: #ffffff;
+  border: 2px solid var(--gold);
+  border-radius: var(--radius-lg);
+  padding: 26px 24px;
+  margin: 28px 0;
+  box-shadow: var(--shadow-md);
+  position: relative;
+}
+
+.tool-widget-badge {
+  position: absolute;
+  top: -12px;
+  right: 20px;
+  background: var(--gold);
+  color: #07222a;
+  font: 800 0.74rem "Trebuchet MS", sans-serif;
+  letter-spacing: 0.08em;
+  padding: 3px 12px;
+  border-radius: var(--radius-pill);
+  text-transform: uppercase;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+[dir="rtl"] .tool-widget-badge {
+  right: auto;
+  left: 20px;
+}
+
+.tool-widget-card h4 {
+  color: var(--deep);
+  font-size: 1.35rem;
+  font-family: Georgia, serif;
+}
+
+/* Converter Inputs */
+.converter-inputs-row {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 16px;
+  margin: 16px 0;
+}
+
+.tool-input-group label {
+  display: block;
+  font: 700 0.84rem "Trebuchet MS", sans-serif;
+  color: var(--deep);
+  margin-bottom: 6px;
+}
+
+.tool-input-group input,
+.tool-input-group select {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  font-size: 1rem;
+  color: var(--ink);
+  background: #ffffff;
+  transition: border-color 0.2s ease;
+}
+
+.tool-input-group input:focus,
+.tool-input-group select:focus {
+  border-color: var(--gold);
+  outline: none;
+}
+
+/* Converter Rates Bar */
+.converter-rates-bar {
+  background: var(--sand-light);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  margin: 16px 0;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.rate-field {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+}
+
+.rate-field input {
+  width: 76px;
+  padding: 5px 8px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  color: var(--deep);
+  text-align: center;
+}
+
+/* Converter Results Grid */
+.converter-outputs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.converter-res-card {
+  background: var(--deep);
+  color: #ffffff;
+  border-radius: var(--radius-md);
+  padding: 14px;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.converter-res-card.highlight {
+  background: var(--gold);
+  color: #07222a;
+}
+
+.converter-res-curr {
+  font: 700 0.82rem "Trebuchet MS", sans-serif;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+  opacity: 0.9;
+}
+
+.converter-res-val {
+  font-size: 1.45rem;
+  font-weight: 800;
+  font-family: "Trebuchet MS", sans-serif;
+}
+
+/* Taxi Quote Checker */
+.quick-presets {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 12px 0 16px;
+}
+
+.preset-btn {
+  background: var(--sand);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  padding: 4px 10px;
+  font: 600 0.8rem "Trebuchet MS", sans-serif;
+  color: var(--ink);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.preset-btn:hover {
+  background: var(--sand-dark);
+  border-color: var(--blue);
+}
+
+.taxi-verdict-box {
+  border-radius: var(--radius-md);
+  padding: 18px 20px;
+  transition: all 0.25s ease;
+}
+
+.taxi-verdict-box.verdict-green {
+  background: #eafaf1;
+  border: 2px solid #27ae60;
+  color: #1e7e43;
+}
+
+.taxi-verdict-box.verdict-yellow {
+  background: #fef9e7;
+  border: 2px solid #f39c12;
+  color: #9a6300;
+}
+
+.taxi-verdict-box.verdict-red {
+  background: #fdedec;
+  border: 2px solid #e74c3c;
+  color: #922b21;
+}
+
+.verdict-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.verdict-body {
+  font-size: 0.94rem;
+  line-height: 1.5;
+}
+
+/* Responsive Data Tables */
+.guide-data-table-wrap {
+  overflow-x: auto;
+  margin: 20px 0 24px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.guide-data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+  text-align: start;
+}
+
+.guide-data-table th {
+  background: var(--deep);
+  color: #ffffff;
+  padding: 12px 16px;
+  font-weight: 600;
+  font-family: "Trebuchet MS", sans-serif;
+  letter-spacing: 0.03em;
+}
+
+.guide-data-table td {
+  padding: 12px 16px;
+  border-top: 1px solid var(--line-light);
+  color: var(--ink);
+}
+
+.guide-data-table tr:nth-child(even) td {
+  background: var(--sand-light);
+}
+
+/* Destination Cards (Where to Go) */
+.guide-dest-card {
+  background: var(--sand-light);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: 28px;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.guide-dest-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--blue);
+}
+
+.guide-dest-media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: var(--deep);
+  overflow: hidden;
+}
+
+.guide-dest-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.guide-dest-card:hover .guide-dest-media img {
+  transform: scale(1.03);
+}
+
+.guide-dest-time-tag {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(10, 58, 71, 0.92);
+  color: #ffffff;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  font: 700 0.76rem "Trebuchet MS", sans-serif;
+  letter-spacing: 0.04em;
+  backdrop-filter: blur(4px);
+}
+
+[dir="rtl"] .guide-dest-time-tag {
+  right: auto;
+  left: 12px;
+}
+
+.guide-dest-body {
+  padding: 22px 24px;
+}
+
+.guide-dest-name {
+  color: var(--deep);
+  font-size: 1.45rem;
+  font-family: Georgia, serif;
+  margin-bottom: 4px;
+}
+
+.guide-dest-sub {
+  color: var(--blue);
+  font: 600 0.94rem "Trebuchet MS", sans-serif;
+  margin-bottom: 12px;
+}
+
+.guide-dest-highlights {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 14px 0 16px;
+}
+
+.guide-dest-highlights li {
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  padding: 3px 12px;
+  font: 600 0.8rem "Trebuchet MS", sans-serif;
+  color: var(--deep);
+}
+
+/* Itinerary Cards */
+.guide-itin-card {
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 26px 26px;
+  margin-bottom: 28px;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+.guide-itin-card.gold-theme {
+  border-top: 5px solid var(--gold);
+}
+
+.guide-itin-card.teal-theme {
+  border-top: 5px solid var(--blue);
+}
+
+.guide-itin-card.deep-theme {
+  border-top: 5px solid var(--deep);
+}
+
+.guide-itin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.guide-itin-badge {
+  background: var(--sand-dark);
+  color: var(--deep);
+  font: 700 0.8rem "Trebuchet MS", sans-serif;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+}
+
+.guide-itin-title {
+  color: var(--deep);
+  font-size: 1.4rem;
+  font-family: Georgia, serif;
+  margin-bottom: 6px;
+}
+
+.guide-itin-meta {
+  font-size: 0.88rem;
+  color: var(--ink-muted);
+  margin-bottom: 18px;
+}
+
+.guide-itin-days-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.guide-itin-day-item {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 14px;
+  align-items: baseline;
+  padding-bottom: 12px;
+  border-bottom: 1px dashed var(--line-light);
+}
+
+.guide-itin-day-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.guide-day-pill {
+  background: var(--sand);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 4px 8px;
+  font: 700 0.82rem "Trebuchet MS", sans-serif;
+  color: var(--deep);
+  text-align: center;
+}
+
+.guide-day-title {
+  font-weight: 700;
+  color: var(--deep);
+  font-size: 0.98rem;
+  margin-bottom: 4px;
+}
+
+.guide-day-desc {
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+
+/* Floating Return to Top Button */
+.guide-back-to-top {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--deep);
+  color: #ffffff;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  box-shadow: var(--shadow-lg);
+  cursor: pointer;
+  z-index: 40;
+  border: 2px solid var(--gold);
+  transition: transform 0.2s ease, background 0.2s ease;
+  text-decoration: none;
+}
+
+.guide-back-to-top:hover {
+  background: var(--blue);
+  color: #ffffff;
+  transform: translateY(-3px);
+}
+
+@media (max-width: 680px) {
+  .converter-inputs-row {
+    grid-template-columns: 1fr;
+  }
+  .guide-itin-day-item {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+  .guide-day-pill {
+    align-self: flex-start;
+  }
+  .guide-chapter-section {
+    padding: 24px 18px;
+  }
+}
