@@ -11,7 +11,7 @@
    a clean, accessible "(Not configured)" badge rather than a broken link.
    ========================================================================== */
 const SOCIAL_URLS = {
-  instagram: 'https://www.instagram.com/view_iksd0/', // e.g. 'https://instagram.com/your_handle'
+  instagram: 'https://www.instagram.com/qonaq.travel.kz?srtk=MW1pYnc2YmhsZXd4cg==', // e.g. 'https://instagram.com/your_handle'
   tiktok:    'https://www.tiktok.com/', // e.g. 'https://tiktok.com/@your_handle'
   threads:   'https://www.threads.com/', // e.g. 'https://threads.net/@your_handle'
   facebook:  'https://www.facebook.com/dinmukhamed.dulat'  // e.g. 'https://facebook.com/your_page'
