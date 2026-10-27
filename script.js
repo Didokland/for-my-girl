@@ -11,7 +11,7 @@
    a clean, accessible "(Not configured)" badge rather than a broken link.
    ========================================================================== */
 const SOCIAL_URLS = {
-  instagram: 'https://www.instagram.com/qonaq.travel.kz?srtk=MW1pYnc2YmhsZXd4cg==', // e.g. 'https://instagram.com/your_handle'
+  instagram: 'https://www.instagram.com/view_iksd0/', // e.g. 'https://instagram.com/your_handle'
   tiktok:    'https://www.tiktok.com/', // e.g. 'https://tiktok.com/@your_handle'
   threads:   'https://www.threads.com/', // e.g. 'https://threads.net/@your_handle'
   facebook:  'https://www.facebook.com/dinmukhamed.dulat'  // e.g. 'https://facebook.com/your_page'
@@ -669,6 +669,7 @@ const T = {
     places: 'Places',
     hotels: 'Hotels',
     guide: 'Guide',
+    travelGuide: 'Travel Guide',
     about: 'How it works',
     welcome: 'Welcome to Turkistan. Choose your language and start exploring its sacred historic sites and vibrant culture.',
     explore: 'Explore Turkistan',
@@ -744,6 +745,7 @@ const T = {
     places: 'Орындар',
     hotels: 'Қонақ үйлер',
     guide: 'Гид',
+    travelGuide: 'Жолсілтеме',
     about: 'Қалай жұмыс істейді',
     welcome: 'Түркістанға қош келдіңіз. Тілді таңдап, рухани тарихи орындар мен бай мәдениетті зерттеңіз.',
     explore: 'Түркістанды зерттеу',
@@ -816,6 +818,7 @@ const T = {
     places: 'Места',
     hotels: 'Отели',
     guide: 'Гид',
+    travelGuide: 'Путеводитель',
     about: 'Как это работает',
     welcome: 'Добро пожаловать в Туркестан. Выберите язык и откройте для себя духовное наследие, памятники и культуру древнего города.',
     explore: 'Исследовать Туркестан',
@@ -888,6 +891,7 @@ const T = {
     places: 'Yerler',
     hotels: 'Oteller',
     guide: 'Rehber',
+    travelGuide: 'Seyahat Rehberi',
     about: 'Nasıl çalışır',
     welcome: 'Türkistan’a hoş geldiniz. Dilinizi seçin ve tarihi yerleri keşfedin.',
     explore: 'Türkistan’ı keşfet',
@@ -957,6 +961,7 @@ const T = {
     places: 'Joylar',
     hotels: 'Mehmonxonalar',
     guide: 'Gid',
+    travelGuide: 'Yo‘l ko‘rsatkich',
     about: 'Qanday ishlaydi',
     welcome: 'Turkistonga xush kelibsiz. Tilni tanlang va tarixiy joylarni kashf eting.',
     explore: 'Turkistonni kashf eting',
@@ -1026,6 +1031,7 @@ const T = {
     places: 'الأماكن',
     hotels: 'الفنادق',
     guide: 'دليل',
+    travelGuide: 'دليل السفر',
     about: 'كيف يعمل',
     welcome: 'مرحباً بك في تركستان. اختر لغتك وابدأ باستكشاف المواقع التاريخية.',
     explore: 'استكشف تركستان',
@@ -1095,6 +1101,7 @@ const T = {
     places: '景点',
     hotels: '酒店',
     guide: '导游',
+    travelGuide: '旅行指南',
     about: '使用方法',
     welcome: '欢迎来到突厥斯坦。选择语言，开始探索历史古迹与灿烂文化。',
     explore: '探索突厥斯坦',
@@ -1164,6 +1171,7 @@ const T = {
     places: '명소',
     hotels: '호텔',
     guide: '가이드',
+    travelGuide: '여행 가이드',
     about: '이용 방법',
     welcome: '투르키스탄에 오신 것을 환영합니다. 언어를 선택하고 역사 유적을 둘러보세요.',
     explore: '투르키스탄 탐험',
@@ -1233,6 +1241,7 @@ const T = {
     places: '名所',
     hotels: 'ホテル',
     guide: 'ガイド',
+    travelGuide: '旅行ガイド',
     about: '使い方',
     welcome: 'トルキスタンへようこそ。言語を選んで歴史的名所を巡りましょう。',
     explore: 'トルキスタンを探索',
@@ -1302,6 +1311,7 @@ const T = {
     places: 'Lieux',
     hotels: 'Hôtels',
     guide: 'Guide',
+    travelGuide: 'Guide de voyage',
     about: 'Comment ça marche',
     welcome: 'Bienvenue à Turkestan. Choisissez votre langue et explorez ses sites sacrés et son histoire.',
     explore: 'Explorer Turkestan',
@@ -1480,98 +1490,593 @@ function langPanel() {
    ========================================================================== */
 const back = '<button class="backbtn" data-back></button>';
 
-const SCREENS = {
-  // 1. Home screen (Video background + Hero glass card)
-  home: () => `
-    <section class="screen home">
-      <div class="hero-glass-card">
-        <span class="hero-badge-tag">Kazakhstan’s Spiritual Capital</span>
-        <h1>QONAQ</h1>
-        <p class="hero-desc">${t('welcome')}</p>
-        <div class="home-photo-box">
-          ${ph(HERO_IMAGE, 'HERO_IMAGE', 'r169')}
+
+/* ==========================================================================
+   EDITORIAL TRAVEL GUIDE RENDERING & INTERACTIVE WIDGETS
+   ========================================================================== */
+function renderTravelGuide(activeChapterId) {
+  const g = typeof KAZAKHSTAN_TRAVEL_GUIDE !== 'undefined'
+    ? KAZAKHSTAN_TRAVEL_GUIDE
+    : (typeof window !== 'undefined' && window.KAZAKHSTAN_TRAVEL_GUIDE ? window.KAZAKHSTAN_TRAVEL_GUIDE : null);
+  if (!g) {
+    return `
+      <section class="screen">
+        ${back}
+        <h2>${t('guide')}</h2>
+        <p>Travel Guide content is loading...</p>
+      </section>`;
+  }
+
+  return `
+    <article class="screen guide-article-wrap" id="travelGuideTop">
+      ${back}
+
+      <!-- Magazine Hero Banner -->
+      <header class="guide-hero">
+        <span class="guide-edition-badge">${g.meta.edition}</span>
+        <h1 class="guide-hero-title">${g.meta.heroTitle}</h1>
+        <p class="guide-hero-subtitle">${g.meta.heroSubtitle}</p>
+        <div class="guide-advisory-alert">
+          <strong>ℹ️ Advisory Note:</strong> ${g.meta.advisoryNotice}
         </div>
-        ${langPanel()}
-        <button class="btn big" data-go="places">
-          ✨ ${t('explore')}
-        </button>
+      </header>
+
+      <!-- Qonaq Definition & Steppe Hospitality -->
+      <section class="guide-qonaq-card">
+        <h3>${g.intro.qonaqTitle}</h3>
+        <p class="guide-qonaq-quote">“${g.intro.qonaqDefinition}”</p>
+        <p class="guide-qonaq-text">${g.intro.hospitalityText}</p>
+      </section>
+
+      <!-- Compact Quick Facts Grid -->
+      <section class="guide-facts-strip">
+        ${g.quickFacts.map(f => `
+          <div class="guide-fact-box">
+            <span class="guide-fact-icon">${f.icon}</span>
+            <div>
+              <div class="guide-fact-label">${f.label}</div>
+              <div class="guide-fact-val">${f.value}</div>
+            </div>
+          </div>
+        `).join('')}
+      </section>
+
+      <!-- Sticky Chapter Navigation Menu -->
+      <nav class="guide-toc-nav" aria-label="Travel Guide Chapters">
+        <div class="guide-toc-scroll">
+          ${g.chapters.map(ch => `
+            <a href="#travel-guide/${ch.id}" class="guide-toc-pill${activeChapterId === ch.id ? ' active' : ''}" data-ch="${ch.id}">
+              ${ch.navLabel}
+            </a>
+          `).join('')}
+        </div>
+      </nav>
+
+      <!-- CHAPTER 1: Before You Land -->
+      <section class="guide-chapter-section" id="ch-before-you-land">
+        <div class="guide-ch-header">
+          <span class="guide-ch-num">${g.chapters[0].number}</span>
+          <h2 class="guide-ch-title">${g.chapters[0].title}</h2>
+          <p class="guide-ch-summary">${g.chapters[0].summary}</p>
+        </div>
+
+        <h3 class="guide-subheading">📱 Essential Smartphone Apps</h3>
+        <p class="guide-p">Download these before departing. Having 2GIS and Yandex Go ready on your home screen turns arriving in Kazakhstan into a smooth, effortless experience:</p>
+
+        <div class="guide-apps-grid">
+          ${g.chapters[0].contentSections[0].items.map(app => `
+            <div class="guide-app-card">
+              <div class="guide-app-top">
+                <span class="guide-app-cat">${app.category}</span>
+                ${app.url ? `<a href="${app.url}" target="_blank" rel="noopener noreferrer" class="guide-app-link">Official Site ↗</a>` : ''}
+              </div>
+              <h4 class="guide-app-name">${app.name}</h4>
+              <p class="guide-app-desc">${app.desc}</p>
+              ${app.tip ? `<div class="guide-app-tip">💡 <strong>Tip:</strong> ${app.tip}</div>` : ''}
+            </div>
+          `).join('')}
+        </div>
+
+        <h3 class="guide-subheading">📶 Mobile Internet & e-SIMs</h3>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));gap:14px;margin-bottom:18px;">
+          ${g.chapters[0].contentSections[1].options.map(opt => `
+            <div style="background:var(--sand-light);border:1px solid var(--line);border-radius:var(--radius-md);padding:16px;">
+              <h5 style="color:var(--deep);font-weight:700;margin-bottom:6px;">${opt.title}</h5>
+              <p style="color:var(--ink-soft);font-size:0.92rem;line-height:1.5;">${opt.desc}</p>
+            </div>
+          `).join('')}
+        </div>
+
+        <div class="guide-callout">
+          <div class="guide-callout-title">💡 ${g.chapters[0].contentSections[1].callout.title}</div>
+          <p>${g.chapters[0].contentSections[1].callout.text}</p>
+        </div>
+      </section>
+
+      <!-- CHAPTER 2: Landing & Airports -->
+      <section class="guide-chapter-section" id="ch-landing">
+        <div class="guide-ch-header">
+          <span class="guide-ch-num">${g.chapters[1].number}</span>
+          <h2 class="guide-ch-title">${g.chapters[1].title}</h2>
+          <p class="guide-ch-summary">${g.chapters[1].summary}</p>
+        </div>
+
+        <h3 class="guide-subheading">🚨 The Airport Taxi Trap (Read Carefully)</h3>
+        <p class="guide-p">${g.chapters[1].contentSections[0].text}</p>
+        <ul style="margin:12px 0 20px 20px;color:var(--ink-soft);font-size:0.95rem;line-height:1.6;">
+          ${g.chapters[1].contentSections[0].warnings.map(w => `<li style="margin-bottom:6px;">${w}</li>`).join('')}
+        </ul>
+
+        <h3 class="guide-subheading">📊 Standard Airport Taxi Benchmarks (August 2026)</h3>
+        <div class="guide-data-table-wrap">
+          <table class="guide-data-table">
+            <thead>
+              <tr>
+                <th>Airport</th>
+                <th>Distance to Center</th>
+                <th>Standard App Taxi</th>
+                <th>Peak Surge / Storm</th>
+                <th>Common Scam Quote</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${g.chapters[1].contentSections[1].benchmarks.map(b => `
+                <tr>
+                  <td><strong>${b.airport}</strong></td>
+                  <td>${b.distance}</td>
+                  <td><span style="color:#1e7e43;font-weight:700">${b.appFareRange}</span></td>
+                  <td>${b.surgeFareRange}</td>
+                  <td><span style="color:#922b21;font-weight:700">${b.scamQuote}</span></td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Interactive Taxi Quote Checker Tool -->
+        <div class="tool-widget-card" id="taxiQuoteWidget">
+          <div class="tool-widget-badge">Interactive Checker</div>
+          <h4>🚕 Airport Taxi Quote Reality Checker</h4>
+          <p class="guide-p" style="margin-bottom:16px;">Test any quoted fare from an airport driver to immediately check if it is within reasonable market range or a classic overcharge scam.</p>
+
+          <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));gap:16px;margin-bottom:12px;">
+            <div class="tool-input-group">
+              <label for="taxiAirportSelect">Select Arrival Airport:</label>
+              <select id="taxiAirportSelect">
+                <option value="ALA" selected>Almaty International (ALA) → City Center</option>
+                <option value="NQZ">Astana Nursultan Nazarbayev (NQZ) → Left Bank</option>
+              </select>
+            </div>
+            <div class="tool-input-group">
+              <label for="taxiFareInput">Quoted Price in Tenge (₸):</label>
+              <input type="number" id="taxiFareInput" value="5000" min="0" step="500" placeholder="e.g. 5000">
+            </div>
+          </div>
+
+          <div class="quick-presets">
+            <span style="font-size:0.8rem;color:var(--ink-muted);font-weight:600">Quick Test Presets:</span>
+            <button type="button" class="preset-btn" data-preset="4500">4,500 ₸ (Fair)</button>
+            <button type="button" class="preset-btn" data-preset="8000">8,000 ₸ (Surge)</button>
+            <button type="button" class="preset-btn" data-preset="25000">25,000 ₸ (Scam)</button>
+            <button type="button" class="preset-btn" data-preset="50000">50,000 ₸ (Scam)</button>
+          </div>
+
+          <button type="button" class="btn" id="checkTaxiQuoteBtn">
+            🔍 Check Quoted Fare
+          </button>
+
+          <div id="taxiQuoteVerdictBox" class="taxi-verdict-box" style="margin-top:16px;"></div>
+
+          <p style="margin-top:12px;font-size:0.78rem;color:var(--ink-muted);line-height:1.4;">
+            ℹ️ <em>Disclaimer: Estimates are illustrative benchmarks based on August 2026 Yandex Go averages. Live fares vary with real-time weather, traffic, and vehicle tier. This does not constitute a guaranteed fare.</em>
+          </p>
+        </div>
+
+        <h3 class="guide-subheading">🚌 Airport Public Bus Connections</h3>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));gap:14px;margin-bottom:18px;">
+          ${g.chapters[1].contentSections[2].buses.map(bus => `
+            <div style="background:var(--sand-light);border:1px solid var(--line);border-radius:var(--radius-md);padding:16px;">
+              <h5 style="color:var(--deep);font-weight:700;margin-bottom:4px;">${bus.city}</h5>
+              <p style="color:var(--ink);font-size:0.9rem;margin-bottom:6px;"><strong>Routes:</strong> ${bus.routes}</p>
+              <p style="color:var(--ink-soft);font-size:0.85rem;margin-bottom:4px;"><strong>Frequency:</strong> ${bus.frequency}</p>
+              <p style="color:#1e7e43;font-size:0.85rem;font-weight:700;"><strong>Fare:</strong> ${bus.fare}</p>
+            </div>
+          `).join('')}
+        </div>
+
+        <div class="guide-callout">
+          <div class="guide-callout-title">📋 ${g.chapters[1].contentSections[2].callout.title}</div>
+          <p>${g.chapters[1].contentSections[2].callout.text}</p>
+        </div>
+      </section>
+
+      <!-- CHAPTER 3: Paying & Money -->
+      <section class="guide-chapter-section" id="ch-paying">
+        <div class="guide-ch-header">
+          <span class="guide-ch-num">${g.chapters[2].number}</span>
+          <h2 class="guide-ch-title">${g.chapters[2].title}</h2>
+          <p class="guide-ch-summary">${g.chapters[2].summary}</p>
+        </div>
+
+        <h3 class="guide-subheading">💳 Cashless Dominance & Card Acceptance</h3>
+        <p class="guide-p">${g.chapters[2].contentSections[0].text}</p>
+        <ul style="margin:10px 0 20px 20px;color:var(--ink-soft);font-size:0.95rem;line-height:1.6;">
+          ${g.chapters[2].contentSections[0].points.map(p => `<li>${p}</li>`).join('')}
+        </ul>
+
+        <h3 class="guide-subheading">💵 When You Still Need Physical Cash</h3>
+        <p class="guide-p">${g.chapters[2].contentSections[1].text}</p>
+        <ul style="margin:10px 0 20px 20px;color:var(--ink-soft);font-size:0.95rem;line-height:1.6;">
+          ${g.chapters[2].contentSections[1].cashScenarios.map(s => `<li>${s}</li>`).join('')}
+        </ul>
+
+        <h3 class="guide-subheading">💱 Currency Exchange & Tipping Customs</h3>
+        <p class="guide-p">${g.chapters[2].contentSections[2].text}</p>
+        <ul style="margin:10px 0 16px 20px;color:var(--ink-soft);font-size:0.95rem;line-height:1.6;">
+          ${g.chapters[2].contentSections[2].tips.map(t => `<li>${t}</li>`).join('')}
+        </ul>
+        <p class="guide-p">${g.chapters[2].contentSections[3].text}</p>
+
+        <!-- Interactive Tenge Currency Converter Tool -->
+        <div class="tool-widget-card" id="currencyConverterWidget">
+          <div class="tool-widget-badge">Interactive Tool</div>
+          <h4>₸ Kazakhstani Tenge (KZT) Live Converter</h4>
+          <p class="guide-p" style="margin-bottom:16px;">Convert between Tenge and major international currencies. Exchange rates can be customized to match today’s live bureau rate.</p>
+
+          <div class="converter-inputs-row">
+            <div class="tool-input-group">
+              <label for="converterAmount">Amount to Convert:</label>
+              <input type="number" id="converterAmount" value="10000" min="0" step="any">
+            </div>
+            <div class="tool-input-group">
+              <label for="converterBase">Base Currency:</label>
+              <select id="converterBase">
+                <option value="KZT" selected>KZT (₸ - Kazakhstani Tenge)</option>
+                <option value="USD">USD ($ - US Dollar)</option>
+                <option value="EUR">EUR (€ - Euro)</option>
+                <option value="AED">AED (د.إ - UAE Dirham)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="converter-rates-bar">
+            <span style="font-weight:700;font-size:0.82rem;color:var(--deep)">Editable Rates (1 Foreign Unit = KZT):</span>
+            <div class="rate-field">
+              <label for="rateUSD">1 USD =</label>
+              <input type="number" id="rateUSD" value="500" min="1" step="0.5"> ₸
+            </div>
+            <div class="rate-field">
+              <label for="rateEUR">1 EUR =</label>
+              <input type="number" id="rateEUR" value="540" min="1" step="0.5"> ₸
+            </div>
+            <div class="rate-field">
+              <label for="rateAED">1 AED =</label>
+              <input type="number" id="rateAED" value="136" min="1" step="0.5"> ₸
+            </div>
+          </div>
+
+          <div class="converter-outputs-grid" id="converterResults"></div>
+        </div>
+
+        <h3 class="guide-subheading">💰 Daily Cost Estimates (August 2026)</h3>
+        <div class="guide-data-table-wrap">
+          <table class="guide-data-table">
+            <thead>
+              <tr>
+                <th>Travel Style</th>
+                <th>Daily Total</th>
+                <th>Accommodation</th>
+                <th>Food & Dining</th>
+                <th>Transport</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${g.chapters[2].contentSections[4].costTiers.map(c => `
+                <tr>
+                  <td><strong>${c.tier}</strong></td>
+                  <td><span style="color:var(--gold);font-weight:700">${c.dailyUsd}</span><br><small style="color:var(--ink-muted)">${c.dailyKzt}</small></td>
+                  <td>${c.hotel}</td>
+                  <td>${c.food}</td>
+                  <td>${c.transport}</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- CHAPTER 4: Getting Around -->
+      <section class="guide-chapter-section" id="ch-getting-around">
+        <div class="guide-ch-header">
+          <span class="guide-ch-num">${g.chapters[3].number}</span>
+          <h2 class="guide-ch-title">${g.chapters[3].title}</h2>
+          <p class="guide-ch-summary">${g.chapters[3].summary}</p>
+        </div>
+
+        <h3 class="guide-subheading">🚇 City Public Transit</h3>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));gap:14px;margin-bottom:20px;">
+          ${g.chapters[3].contentSections[0].modes.map(m => `
+            <div style="background:var(--sand-light);border:1px solid var(--line);border-radius:var(--radius-md);padding:16px;">
+              <h5 style="color:var(--deep);font-weight:700;margin-bottom:6px;">${m.title}</h5>
+              <p style="color:var(--ink-soft);font-size:0.92rem;line-height:1.5;">${m.desc}</p>
+            </div>
+          `).join('')}
+        </div>
+
+        <h3 class="guide-subheading">🚆 Intercity Trains: High-Speed Talgo & Soviet Classics</h3>
+        <p class="guide-p">${g.chapters[3].contentSections[1].text}</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));gap:14px;margin-bottom:20px;">
+          ${g.chapters[3].contentSections[1].trainTypes.map(tr => `
+            <div style="background:var(--sand-light);border:1px solid var(--line);border-radius:var(--radius-md);padding:16px;">
+              <h5 style="color:var(--deep);font-weight:700;margin-bottom:6px;">${tr.name}</h5>
+              <p style="color:var(--ink-soft);font-size:0.92rem;line-height:1.5;margin-bottom:8px;">${tr.desc}</p>
+              <div class="guide-app-tip">💡 <strong>Tip:</strong> ${tr.tip}</div>
+            </div>
+          `).join('')}
+        </div>
+
+        <h3 class="guide-subheading">✈️ Domestic Aviation: Spanning the Steppe</h3>
+        <p class="guide-p">${g.chapters[3].contentSections[2].text}</p>
+        <ul style="margin:10px 0 20px 20px;color:var(--ink-soft);font-size:0.95rem;line-height:1.6;">
+          ${g.chapters[3].contentSections[2].airlines.map(a => `<li><strong>${a.name}:</strong> ${a.desc}</li>`).join('')}
+        </ul>
+
+        <h3 class="guide-subheading">🚗 Highway Driving & 4WD Requirements</h3>
+        <p class="guide-p">${g.chapters[3].contentSections[3].text}</p>
+        <ul style="margin:10px 0 20px 20px;color:var(--ink-soft);font-size:0.95rem;line-height:1.6;">
+          ${g.chapters[3].contentSections[3].drivingRules.map(r => `<li>${r}</li>`).join('')}
+        </ul>
+
+        <h3 class="guide-subheading">📍 Intercity Distance & Transit Times Table</h3>
+        <div class="guide-data-table-wrap">
+          <table class="guide-data-table">
+            <thead>
+              <tr>
+                <th>Route Corridor</th>
+                <th>Distance</th>
+                <th>Flight Duration</th>
+                <th>Train (Talgo)</th>
+                <th>Road / Highway</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${g.chapters[3].contentSections[4].routes.map(r => `
+                <tr>
+                  <td><strong>${r.fromTo}</strong></td>
+                  <td>${r.distance}</td>
+                  <td>${r.flight}</td>
+                  <td>${r.train}</td>
+                  <td>${r.road}</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- CHAPTER 5: Where to Go -->
+      <section class="guide-chapter-section" id="ch-where-to-go">
+        <div class="guide-ch-header">
+          <span class="guide-ch-num">${g.chapters[4].number}</span>
+          <h2 class="guide-ch-title">${g.chapters[4].title}</h2>
+          <p class="guide-ch-summary">${g.chapters[4].summary}</p>
+        </div>
+
+        <div class="guide-destinations-list">
+          ${g.chapters[4].destinations.map(d => `
+            <article class="guide-dest-card" id="${d.id}">
+              <div class="guide-dest-media">
+                <img src="${d.img}" alt="${d.name}" loading="lazy">
+                <span class="guide-dest-time-tag">🗓️ ${d.bestTime}</span>
+              </div>
+              <div class="guide-dest-body">
+                <h3 class="guide-dest-name">${d.name}</h3>
+                <div class="guide-dest-sub">${d.subtitle}</div>
+                <p class="guide-p">${d.desc}</p>
+                <h5 style="color:var(--deep);font-size:0.94rem;font-weight:700;margin-top:10px;">🌟 Key Highlights:</h5>
+                <ul class="guide-dest-highlights">
+                  ${d.highlights.map(h => `<li>✓ ${h}</li>`).join('')}
+                </ul>
+                <div class="guide-callout" style="margin-bottom:0">
+                  <div class="guide-callout-title">💡 Local Insider Tip</div>
+                  <p>${d.tip}</p>
+                </div>
+                ${d.id === 'dest-turkestan' ? `
+                  <div style="margin-top:16px;padding:14px;background:#eef6f8;border:1px solid var(--blue);border-radius:var(--radius-md);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
+                    <div>
+                      <strong style="color:var(--deep);font-size:0.95rem;">Looking for a certified guide in Turkestan?</strong>
+                      <div style="font-size:0.85rem;color:var(--ink-soft)">Meet our licensed historian-guide Alisher Nurpeisov for tailored UNESCO tours.</div>
+                    </div>
+                    <button class="btn whatsapp" data-go="guide" style="font-size:0.85rem;padding:6px 14px;">
+                      ${SVG_ICONS.whatsapp}
+                      <span>View Guide Profile</span>
+                    </button>
+                  </div>
+                ` : ''}
+              </div>
+            </article>
+          `).join('')}
+        </div>
+      </section>
+
+      <!-- CHAPTER 6: Itineraries -->
+      <section class="guide-chapter-section" id="ch-itineraries">
+        <div class="guide-ch-header">
+          <span class="guide-ch-num">${g.chapters[5].number}</span>
+          <h2 class="guide-ch-title">${g.chapters[5].title}</h2>
+          <p class="guide-ch-summary">${g.chapters[5].summary}</p>
+        </div>
+
+        <div class="guide-itineraries-list">
+          ${g.chapters[5].itineraries.map((it, idx) => `
+            <article class="guide-itin-card ${idx === 0 ? 'gold-theme' : (idx === 1 ? 'teal-theme' : 'deep-theme')}">
+              <div class="guide-itin-header">
+                <span class="guide-itin-badge">${it.tag}</span>
+                <span style="font-size:0.82rem;font-weight:700;color:var(--deep);">${it.pace}</span>
+              </div>
+              <h3 class="guide-itin-title">${it.title}</h3>
+              <p class="guide-itin-meta"><strong>Ideal for:</strong> ${it.idealFor}</p>
+
+              <div class="guide-itin-days-list">
+                ${it.days.map(d => `
+                  <div class="guide-itin-day-item">
+                    <span class="guide-day-pill">${d.day}</span>
+                    <div>
+                      <h4 class="guide-day-title">${d.title}</h4>
+                      <p class="guide-day-desc">${d.desc}</p>
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+            </article>
+          `).join('')}
+        </div>
+      </section>
+
+      <!-- Return to Top Floating Link -->
+      <a href="#guide" class="guide-back-to-top" title="Return to Top" aria-label="Return to Top">↑</a>
+    </article>
+  `;
+}
+
+function initGuideWidgets() {
+  // 1. Currency Converter Handler
+  const amtInput = $('converterAmount');
+  const baseSelect = $('converterBase');
+  const rateUsdInput = $('rateUSD');
+  const rateEurInput = $('rateEUR');
+  const rateAedInput = $('rateAED');
+  const resultsBox = $('converterResults');
+
+  function updateConverter() {
+    if (!resultsBox || !amtInput) return;
+    const amount = parseFloat(amtInput.value) || 0;
+    const base = baseSelect ? baseSelect.value : 'KZT';
+    const rateUSD = parseFloat(rateUsdInput ? rateUsdInput.value : 500) || 500;
+    const rateEUR = parseFloat(rateEurInput ? rateEurInput.value : 540) || 540;
+    const rateAED = parseFloat(rateAedInput ? rateAedInput.value : 136) || 136;
+
+    let kzt = 0;
+    if (base === 'KZT') kzt = amount;
+    else if (base === 'USD') kzt = amount * rateUSD;
+    else if (base === 'EUR') kzt = amount * rateEUR;
+    else if (base === 'AED') kzt = amount * rateAED;
+
+    const usdVal = kzt / rateUSD;
+    const eurVal = kzt / rateEUR;
+    const aedVal = kzt / rateAED;
+
+    resultsBox.innerHTML = `
+      <div class="converter-res-card ${base === 'KZT' ? 'highlight' : ''}">
+        <div class="converter-res-curr">₸ Tenge (KZT)</div>
+        <div class="converter-res-val">${Math.round(kzt).toLocaleString()} ₸</div>
       </div>
-    </section>`,
+      <div class="converter-res-card ${base === 'USD' ? 'highlight' : ''}">
+        <div class="converter-res-curr">$ US Dollar</div>
+        <div class="converter-res-val">$${usdVal.toFixed(2)}</div>
+      </div>
+      <div class="converter-res-card ${base === 'EUR' ? 'highlight' : ''}">
+        <div class="converter-res-curr">€ Euro</div>
+        <div class="converter-res-val">€${eurVal.toFixed(2)}</div>
+      </div>
+      <div class="converter-res-card ${base === 'AED' ? 'highlight' : ''}">
+        <div class="converter-res-curr">د.إ UAE Dirham</div>
+        <div class="converter-res-val">${aedVal.toFixed(2)} AED</div>
+      </div>
+    `;
+  }
 
-  // 2. Places screen
-  places: () => `
-    <section class="screen">
-      ${back}
-      <h2>${t('placesT')}</h2>
-      ${PLACES.map(card).join('')}
-    </section>`,
+  if (amtInput) amtInput.oninput = updateConverter;
+  if (baseSelect) baseSelect.onchange = updateConverter;
+  if (rateUsdInput) rateUsdInput.oninput = updateConverter;
+  if (rateEurInput) rateEurInput.oninput = updateConverter;
+  if (rateAedInput) rateAedInput.oninput = updateConverter;
+  updateConverter();
 
-  // 3. Single Place detail
-  place: id => {
-    const p = PLACES.find(x => x.id === id);
-    if (!p) return SCREENS.places();
-    return `
-      <section class="screen">
-        ${back}
-        ${ph(p.img, p.tag + '_IMAGE', 'r169')}
-        <h2 style="margin-top:16px">${pick(p.name)}</h2>
-        <p>${pick(p.desc)}</p>
-        <h3 style="margin:24px 0 12px">${t('where')}</h3>
-        ${ph(p.map, 'MAP_PLACEHOLDER', 'map')}
-        <div style="margin-top:14px">
-          <span class="pin">📍 ${t('start')}: ${p.start.label}</span>
-          <span class="pin">🏁 ${t('dest')}: ${pick(p.name)}</span>
-        </div>
-        <p class="hint">${p.start.lat === null ? t('unset') : p.start.lat + ', ' + p.start.lng}</p>
-        <div class="route">${t('route')}</div>
-      </section>`;
-  },
+  // 2. Airport Taxi Quote Checker Handler
+  const airportSelect = $('taxiAirportSelect');
+  const fareInput = $('taxiFareInput');
+  const checkBtn = $('checkTaxiQuoteBtn');
+  const verdictBox = $('taxiQuoteVerdictBox');
 
-  // 4. Kaspi Payment screen
-  pay: id => {
-    const p = PLACES.find(x => x.id === id);
-    if (!p) return SCREENS.places();
-    return `
-      <section class="screen" style="text-align:center">
-        ${back}
-        <h2>${t('payT')}</h2>
-        <h3>${pick(p.name)}</h3>
-        <div class="paybox">
-          ${ph(p.kaspi, p.kaspiLabel || 'KASPI_QR_IMAGE', 'sq')}
-        </div>
-        <p style="max-width:36ch;margin:0 auto">${t('payI')}</p>
-      </section>`;
-  },
+  function checkTaxiFare() {
+    if (!verdictBox || !fareInput) return;
+    const airport = airportSelect ? airportSelect.value : 'ALA';
+    const fare = parseFloat(fareInput.value) || 0;
 
-  // 5. Hotels list screen
-  hotels: () => `
-    <section class="screen">
-      ${back}
-      <h2>${t('hotels')}</h2>
-      ${HOTELS.map(hotelCard).join('')}
-    </section>`,
+    let verdictClass = 'verdict-green';
+    let title = '';
+    let body = '';
 
-  // 6. Hotel detail screen
-  hotel: id => {
-    const h = HOTELS.find(x => x.id === id);
-    if (!h) return SCREENS.hotels();
-    return `
-      <section class="screen">
-        ${back}
-        ${ph(h.img, h.tag, 'r169')}
-        <h2 style="margin-top:16px">${pick(h.name)}</h2>
-        ${h.sample ? `<span class="badge">${t('sample')}</span>` : ''}
-        <p>${pick(h.desc)}</p>
-        <p class="hint">📍 ${h.address ? pick(h.address) : t('addr')}</p>
-        <div style="margin-top:16px">
-          ${ph(h.map, 'HOTEL_MAP_PLACEHOLDER', 'map')}
-        </div>
-        <div class="route">${t('route')}</div>
-      </section>`;
-  },
+    if (airport === 'ALA') {
+      if (fare <= 5500) {
+        verdictClass = 'verdict-green';
+        title = '✅ Fair & Standard Price (Almaty ALA)';
+        body = `Your quote of ${fare.toLocaleString()} ₸ is completely in line with standard Yandex Go Economy and Comfort app rates (~3,500 – 5,500 ₸ / $7–$11) into central Almaty. This is a fair rate.`;
+      } else if (fare <= 8500) {
+        verdictClass = 'verdict-yellow';
+        title = '⚠️ Elevated Fare / Surge Conditions';
+        body = `Your quote of ${fare.toLocaleString()} ₸ is roughly 1.5x to 2x the standard economy rate. This can be normal for Comfort+ or during winter blizzards / Friday peak traffic, but is higher than normal base app pricing.`;
+      } else {
+        verdictClass = 'verdict-red';
+        title = '🚨 Extreme Airport Taxi Scam Alert!';
+        body = `Your quote of ${fare.toLocaleString()} ₸ is significantly over market value (often 3x to 10x higher!). Unofficial gypsy drivers at Almaty Airport aggressively target arriving tourists with quotes between 15,000 ₸ and 50,000 ₸. <strong>Do not take this ride.</strong> Say “Nyet, spasibo” and order a Yandex Go on airport Wi-Fi (~4,000 ₸) or use the official taxi counter inside the terminal.`;
+      }
+    } else {
+      if (fare <= 4500) {
+        verdictClass = 'verdict-green';
+        title = '✅ Fair & Standard Price (Astana NQZ)';
+        body = `Your quote of ${fare.toLocaleString()} ₸ matches normal Yandex Go app rates (~3,000 – 4,500 ₸ / $6–$9) from Astana Airport to the Left Bank (Baiterek / Khan Shatyr).`;
+      } else if (fare <= 7500) {
+        verdictClass = 'verdict-yellow';
+        title = '⚠️ Elevated Surge / Comfort Fare';
+        body = `Your quote of ${fare.toLocaleString()} ₸ is higher than standard off-peak fares (~3,500 ₸), but reasonable for severe sub-zero winter blizzards or Comfort+ class.`;
+      } else {
+        verdictClass = 'verdict-red';
+        title = '🚨 High Overcharge Warning!';
+        body = `Your quote of ${fare.toLocaleString()} ₸ is an overcharge. Unofficial terminal solicitors often quote 15,000 – 35,000 ₸. Order through Yandex Go on airport Wi-Fi or visit the official terminal dispatch desk.`;
+      }
+    }
 
-  // 7. Guide Profile Screen
-  guide: () => `
+    verdictBox.className = `taxi-verdict-box ${verdictClass}`;
+    verdictBox.innerHTML = `
+      <div class="verdict-title">${title}</div>
+      <div class="verdict-body">${body}</div>
+    `;
+  }
+
+  if (checkBtn) checkBtn.onclick = checkTaxiFare;
+  if (fareInput) fareInput.oninput = checkTaxiFare;
+  if (airportSelect) airportSelect.onchange = checkTaxiFare;
+
+  document.querySelectorAll('.preset-btn').forEach(btn => {
+    btn.onclick = () => {
+      if (fareInput) {
+        fareInput.value = btn.dataset.preset;
+        checkTaxiFare();
+      }
+    };
+  });
+
+  checkTaxiFare();
+
+  // 3. Chapter Navigation Link Handlers
+  document.querySelectorAll('.guide-toc-pill').forEach(pill => {
+    pill.onclick = (e) => {
+      const ch = pill.dataset.ch;
+      const targetEl = document.getElementById('ch-' + ch);
+      if (targetEl) {
+        e.preventDefault();
+        history.replaceState(null, null, '#travel-guide/' + ch);
+        targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        document.querySelectorAll('.guide-toc-pill').forEach(p => p.classList.toggle('active', p === pill));
+      }
+    };
+  });
+}
+
+function renderPersonalTourGuideScreen() {
+  return `
     <section class="screen guide-screen">
       ${back}
 
@@ -1674,7 +2179,107 @@ const SCREENS = {
           `).join('')}
         </div>
       </div>
+    </section>
+  `;
+}
+
+const SCREENS = {
+  // 1. Home screen (Video background + Hero glass card)
+  home: () => `
+    <section class="screen home">
+      <div class="hero-glass-card">
+        <span class="hero-badge-tag">Kazakhstan’s Spiritual Capital</span>
+        <h1>QONAQ</h1>
+        <p class="hero-desc">${t('welcome')}</p>
+        <div class="home-photo-box">
+          ${ph(HERO_IMAGE, 'HERO_IMAGE', 'r169')}
+        </div>
+        ${langPanel()}
+        <button class="btn big" data-go="places">
+          ✨ ${t('explore')}
+        </button>
+      </div>
     </section>`,
+
+  // 2. Places screen
+  places: () => `
+    <section class="screen">
+      ${back}
+      <h2>${t('placesT')}</h2>
+      ${PLACES.map(card).join('')}
+    </section>`,
+
+  // 3. Single Place detail
+  place: id => {
+    const p = PLACES.find(x => x.id === id);
+    if (!p) return SCREENS.places();
+    return `
+      <section class="screen">
+        ${back}
+        ${ph(p.img, p.tag + '_IMAGE', 'r169')}
+        <h2 style="margin-top:16px">${pick(p.name)}</h2>
+        <p>${pick(p.desc)}</p>
+        <h3 style="margin:24px 0 12px">${t('where')}</h3>
+        ${ph(p.map, 'MAP_PLACEHOLDER', 'map')}
+        <div style="margin-top:14px">
+          <span class="pin">📍 ${t('start')}: ${p.start.label}</span>
+          <span class="pin">🏁 ${t('dest')}: ${pick(p.name)}</span>
+        </div>
+        <p class="hint">${p.start.lat === null ? t('unset') : p.start.lat + ', ' + p.start.lng}</p>
+        <div class="route">${t('route')}</div>
+      </section>`;
+  },
+
+  // 4. Kaspi Payment screen
+  pay: id => {
+    const p = PLACES.find(x => x.id === id);
+    if (!p) return SCREENS.places();
+    return `
+      <section class="screen" style="text-align:center">
+        ${back}
+        <h2>${t('payT')}</h2>
+        <h3>${pick(p.name)}</h3>
+        <div class="paybox">
+          ${ph(p.kaspi, p.kaspiLabel || 'KASPI_QR_IMAGE', 'sq')}
+        </div>
+        <p style="max-width:36ch;margin:0 auto">${t('payI')}</p>
+      </section>`;
+  },
+
+  // 5. Hotels list screen
+  hotels: () => `
+    <section class="screen">
+      ${back}
+      <h2>${t('hotels')}</h2>
+      ${HOTELS.map(hotelCard).join('')}
+    </section>`,
+
+  // 6. Hotel detail screen
+  hotel: id => {
+    const h = HOTELS.find(x => x.id === id);
+    if (!h) return SCREENS.hotels();
+    return `
+      <section class="screen">
+        ${back}
+        ${ph(h.img, h.tag, 'r169')}
+        <h2 style="margin-top:16px">${pick(h.name)}</h2>
+        ${h.sample ? `<span class="badge">${t('sample')}</span>` : ''}
+        <p>${pick(h.desc)}</p>
+        <p class="hint">📍 ${h.address ? pick(h.address) : t('addr')}</p>
+        <div style="margin-top:16px">
+          ${ph(h.map, 'HOTEL_MAP_PLACEHOLDER', 'map')}
+        </div>
+        <div class="route">${t('route')}</div>
+      </section>`;
+  },
+
+  // 7. Guide Profile Screen (Original Personal Guide Profile)
+  guide: () => renderPersonalTourGuideScreen(),
+  'tour-guide': () => renderPersonalTourGuideScreen(),
+
+  // 8. Editorial Kazakhstan Travel Guide
+  'travel-guide': (sub) => renderTravelGuide(sub),
+  travelguide: (sub) => renderTravelGuide(sub),
 
   // 8. How it works (About) screen
   about: () => `
@@ -1944,6 +2549,9 @@ const PARENT = {
   about: 'home',
   hotels: 'home',
   guide: 'home',
+  'tour-guide': 'home',
+  'travel-guide': 'home',
+  travelguide: 'home',
   place: 'places',
   pay: 'places',
   hotel: 'hotels'
@@ -1991,6 +2599,17 @@ function route(keep) {
 
   // Hydrate images
   hydrate($('app'));
+
+  // Initialize interactive widgets if on travel guide
+  if (name === 'travel-guide' || name === 'travelguide' || name === 'guide-articles') {
+    initGuideWidgets();
+    if (id) {
+      setTimeout(() => {
+        const targetEl = document.getElementById('ch-' + id);
+        if (targetEl) targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 80);
+    }
+  }
 
   // Attach guide booking button event
   const guideBookBtn = $('guideBookDemoBtn');
